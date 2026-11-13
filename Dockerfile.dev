@@ -1,4 +1,4 @@
-FROM node:24.19-slim
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -19,4 +19,6 @@ COPY . .
 EXPOSE 3000
 
 #RUN npm run start:dev
+# levanta el servidor en un modo desarrollo, con hot reload
+# Cambia la última línea de tu Dockerfile.dev para que quede exactamente así:
 CMD ["npm", "run", "start:dev"]
