@@ -23,8 +23,8 @@ jobs:
       - name: instalar-dependencias
         run: npm ci
 
-#      - name: compilar
-#        run: npm run build
+      - name: ejecución-pruebas
+        run: npm run test
 
 #  publicar:
 #    needs: pruebas            # solo publica si "pruebas" pasó
