@@ -5,7 +5,7 @@ on:
     branches: [master]
 
 env:
-  IMAGEN: ${{ secrets.DOCKER_USERNAME }}/api-cine
+  IMAGEN: ${{ secrets.DOCKER_USERNAME }}/api-cine:${{ github.sha }}
 
 jobs:
   pruebas:
@@ -23,26 +23,26 @@ jobs:
       - name: instalar-dependencias
         run: npm ci
 
-      - name: compilar
-        run: npm run build
+#      - name: compilar
+#        run: npm run build
 
-  publicar:
-    needs: pruebas            # solo publica si "pruebas" pasó
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v4
+#  publicar:
+#    needs: pruebas            # solo publica si "pruebas" pasó
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout
+#        uses: actions/checkout@v4#
 
-      - name: login-docker-hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+#      - name: login-docker-hub
+#        uses: docker/login-action@v3
+#        with:
+#          username: ${{ secrets.DOCKER_USERNAME }}
+#          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: construir-imagen
-        run: docker build -t $IMAGEN:${{ github.sha }} -t $IMAGEN:latest .
+#      - name: construir-imagen
+#        run: docker build -t $IMAGEN:${{ github.sha }} -t $IMAGEN:latest .
 
-      - name: subir-imagen
-        run: |
-          docker push $IMAGEN:${{ github.sha }}
-          docker push $IMAGEN:latest
+#      - name: subir-imagen
+#        run: |
+#          docker push $IMAGEN:${{ github.sha }}
+#          docker push $IMAGEN:latest
