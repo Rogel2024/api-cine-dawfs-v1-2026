@@ -47,6 +47,13 @@ jobs:
           docker push $IMAGEN
           echo "imagen subida a docker hub"
 
+  desplegar:
+    needs: docker
+    runs-on: self-hosted
+    steps:
+      - name: desplegar-local
+        run: ~/cine-deploy/deploy.sh api ${{ github.sha }}
+
 #      - name: construir-imagen
 #        run: docker build -t $IMAGEN:${{ github.sha }} -t $IMAGEN:latest .
 
